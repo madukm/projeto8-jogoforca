@@ -1,6 +1,18 @@
 export default function Letras(props) {
-    const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    const alfabeto = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
     
-    return ("");    
+    return (
+        <div class="letters">
+            {alfabeto.map( letra => <Letra key={letra} letter={letra}/>)}
+        </div>
+    );    
+}
+
+function Letra(props) {
+    return (
+        <div class="letter">
+            <button type="button" disabled>{props.letter}</button>
+        </div>
+    );
 }

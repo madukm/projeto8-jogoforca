@@ -1,3 +1,4 @@
+import Letras from "./Letras";
 
 export default function Jogo(props) {
     // const forca_img = [
@@ -20,6 +21,9 @@ export default function Jogo(props) {
                 </div>
                 <button> Escolher palavra </button>
 
+            </div>
+            <div class="center">
+                <Letras />
             </div>
         </div>
     );
