@@ -5,17 +5,17 @@ import { useState } from "react";
 
 
 export default function App() {
-	const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+	const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 	let [enabledAlphabet, setEnabledAlphabet] = useState(false);
 	let [n_misses, setNMisses] = useState(0);
 	let [letters, setLetters] = useState(new Map());
 	let [word, setWord] = useState([]);
-	let [isPlaying, toggleIsPlaying] = useState(false);
 	let [gameStatus, setGameStatus] = useState('');
 
 	function handleClick(letter) {
 		let wrong = true;
+		updateLetter(letter);
 		word.forEach((el) => {
 			if (el === letter) wrong = false;
 		});
@@ -26,7 +26,6 @@ export default function App() {
 		} else {
 			checkEndGame(n_misses);
 		}
-		updateLetter(letter);
 	}
 
 	function updateLetter(letter) {
@@ -52,7 +51,6 @@ export default function App() {
 		setEnabledAlphabet(true);
 		setGameStatus('playing');
 		chooseRandomWord();
-		toggleIsPlaying(true);
 	}
 
 	function checkEndGame(misses) {
@@ -67,6 +65,7 @@ export default function App() {
 				correct = false;
 			}
         });
+		console.log("word is correct: " + correct);
 		if (correct) {
 			setGameStatus('win');
 			setEnabledAlphabet(false);
@@ -79,7 +78,6 @@ export default function App() {
 			<Jogo 
 				n_misses={n_misses}
 				word={word}
-				isPlaying={isPlaying}
 				gameStart={gameStart}
 				letters={letters}
 				status={gameStatus}
