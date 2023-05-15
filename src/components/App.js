@@ -6,38 +6,27 @@ import { useState } from "react";
 
 export default function App() {
 	const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    
-	const initialMap = new Map();
-	for (const l of alfabeto) {
-		initialMap.set(l, false);
-	} 
 
 	let [enabledAlphabet, setEnabledAlphabet] = useState(false);
 	let [n_misses, setNMisses] = useState(0);
-	let [letters, setLetters] = useState(initialMap);
-	// let [disabledKeys, setDisabledKeys] = useState([]);
+	let [letters, setLetters] = useState(new Map());
 	let [word, setWord] = useState([]);
-	let [currWord, updateWord] = useState([]);
 	let [isPlaying, toggleIsPlaying] = useState(false);
+	let [gameStatus, setGameStatus] = useState('');
 
-	function checkLetter(letter) {
+	function handleClick(letter) {
 		let wrong = true;
 		word.forEach((el) => {
-			if (el === letter) {
-				// const newMap = new Map(letters);
-				// newMap.set(letter, true);
-				// setLetters(newMap);
-				wrong = false;
-			}
+			if (el === letter) wrong = false;
 		});
 		if (wrong) {
 			setNMisses(n_misses + 1);
+			checkEndGame(n_misses + 1);
+			
+		} else {
+			checkEndGame(n_misses);
 		}
 		updateLetter(letter);
-	}
-
-	function handleClick(letter) {
-		checkLetter(letter);
 	}
 
 	function updateLetter(letter) {
@@ -55,13 +44,34 @@ export default function App() {
 	function chooseRandomWord() {
 		const randomWord = palavras[Math.floor(Math.random() * palavras.length)];
 		setWord([...randomWord]);
-		updateWord(new Array(randomWord.length).fill("_"));
 	}
 	
 	function gameStart() {
+		resetLetters();
+		setNMisses(0);
 		setEnabledAlphabet(true);
+		setGameStatus('playing');
 		chooseRandomWord();
 		toggleIsPlaying(true);
+	}
+
+	function checkEndGame(misses) {
+		if (misses === 6) {
+			setGameStatus('loss');
+			setEnabledAlphabet(false);
+			return;
+		}
+		let correct = true;
+		word.forEach(letter => {
+            if (!letters.get(letter)) {
+				correct = false;
+			}
+        });
+		if (correct) {
+			setGameStatus('win');
+			setEnabledAlphabet(false);
+			return;
+		} 
 	}
 
 	return (
@@ -72,6 +82,7 @@ export default function App() {
 				isPlaying={isPlaying}
 				gameStart={gameStart}
 				letters={letters}
+				status={gameStatus}
 			/>
 			<div class="center">
                 <Letras 

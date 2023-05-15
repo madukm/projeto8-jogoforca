@@ -77,7 +77,8 @@
     justify-content: space-between;
 }
 
-.currWord {
+.playing {
+    color: black;
     font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 700;
@@ -85,7 +86,26 @@
     display: flex;
     align-items: center;
     text-align: center;
+}
 
-    color: #000000;
+.win {
+    color: green;
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
 
+.loss {
+    color: red;
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }

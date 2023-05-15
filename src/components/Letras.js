@@ -18,7 +18,7 @@ export default function Letras({enabledAlphabet, handleClick, letters}) {
 function Letra({letter, isDisabled, handleClick}) {
     return (
         <div class="letter">
-            <button type="button" 
+            <button data-test="letter" type="button" 
                 disabled={isDisabled} 
                 onClick={handleClick}> 
             {letter.toUpperCase()} </button>
