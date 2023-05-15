@@ -1,0 +1,33 @@
+.game {
+    display: flex;
+    flex-direction: column;
+}
+
+.game .container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 59px;
+}
+
+.forca img {
+    width: 400px;
+
+}
+
+.game .container button {
+    width: 200px;
+    height: 60px;
+    margin-top: 30px;
+    background: #27AE60;
+    border-radius: 8px;
+    border: none;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
