@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Letras({enabledAlphabet, handleClick}) {
+export default function Letras({enabledAlphabet, handleClick, letters}) {
     const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     
     return (
@@ -9,8 +9,8 @@ export default function Letras({enabledAlphabet, handleClick}) {
                 <Letra 
                     key={letra} 
                     letter={letra} 
-                    isDisabled={!enabledAlphabet}
-                    handleClick={handleClick(letra)}/>)}
+                    isDisabled={!enabledAlphabet || letters.get(letra)}
+                    handleClick={() => handleClick(letra)}/>)}
         </div>
     );    
 }
